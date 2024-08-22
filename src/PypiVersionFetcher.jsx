@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 function PypiVersionFetcher() {
   const [packages, setPackages] = useState('');
   const [versions, setVersions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFetchVersions = async () => {
+    setIsLoading(true);
     const packageList = packages.split('\n').map(pkg => pkg.trim());
     const versionList = [];
 
@@ -25,6 +27,7 @@ function PypiVersionFetcher() {
     }
 
     setVersions(versionList);
+    setIsLoading(false);
   };
 
   return (
@@ -39,15 +42,20 @@ function PypiVersionFetcher() {
         className="textarea textarea-primary" 
       />
       <br />
-      <button className="btn btn-primary" onClick={handleFetchVersions}>Fetch Versions</button>
-      <h2>Ouput:</h2>
+      <button 
+        className="btn btn-primary" 
+        onClick={handleFetchVersions} 
+        disabled={isLoading}
+      >
+        {isLoading ? 'Fetching...' : 'Fetch Versions'}
+      </button>
+      <h2>Output:</h2>
       <textarea
         rows="5"
         cols="40"
         value={versions.join('\n')}
         readOnly
         className="textarea textarea-accent" 
-
       />
     </div>
   );
