@@ -11,15 +11,15 @@ function PypiVersionFetcher() {
     for (let pkg of packageList) {
       if (pkg) {
         try {
-          const response = await fetch(`https://pypi.org/project/${pkg}`);
-          const text = await response.text();
-          const regex = /<h1 class="package-header__name">\s*(.*?)\s*<\/h1>/;
-          const match = text.match(regex);
-          if (match) {
-            versionList.push(`${pkg}==${match[1].split(' ')[1]}`);
+          const response = await fetch(`https://pip-versionalizer-backend.adaptable.app/api/package/${pkg}`);
+          if (response.ok) {
+            const data = await response.json();
+            versionList.push(`${data.package}==${data.version}`);
+          } else {
+            versionList.push(`${pkg}==Not Found`);
           }
         } catch (error) {
-          versionList.push(`${pkg}==Not Found`);
+          versionList.push(`${pkg}==Error`);
         }
       }
     }
