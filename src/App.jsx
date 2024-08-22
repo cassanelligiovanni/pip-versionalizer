@@ -3,7 +3,7 @@ import PypiVersionFetcher from './PypiVersionFetcher';
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex justify-center w-full">
       <PypiVersionFetcher />
     </div>
   );

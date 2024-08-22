@@ -28,23 +28,26 @@ function PypiVersionFetcher() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>PyPI Package Version Fetcher</h1>
+    <div className="flex flex-col gap-4 w-[50%] justify-center items-center py-20">
+      <h1 className="text-4xl font-bold mb-6">Pip-Versionalizer</h1>
       <textarea
         rows="5"
         cols="40"
         value={packages}
         onChange={(e) => setPackages(e.target.value)}
         placeholder="Enter package names, one per line"
+        className="textarea textarea-primary" 
       />
       <br />
-      <button onClick={handleFetchVersions}>Fetch Versions</button>
-      <h2>Requirements.txt:</h2>
+      <button className="btn btn-primary" onClick={handleFetchVersions}>Fetch Versions</button>
+      <h2>Ouput:</h2>
       <textarea
-        rows="10"
+        rows="5"
         cols="40"
         value={versions.join('\n')}
         readOnly
+        className="textarea textarea-accent" 
+
       />
     </div>
   );
