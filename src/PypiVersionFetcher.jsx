@@ -13,7 +13,7 @@ function PypiVersionFetcher() {
     for (let pkg of packageList) {
       if (pkg) {
         try {
-          const response = await fetch(`https://pip-versionalizer-backend.adaptable.app/api/package/${pkg}`);
+          const response = await fetch(`https://pip-versionalizer-backend.fly.dev/api/package/${pkg}`);
           if (response.ok) {
             const data = await response.json();
             versionList.push(`${data.package}==${data.version}`);
